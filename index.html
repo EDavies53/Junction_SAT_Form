@@ -7,7 +7,7 @@
     <title>ELV Junction SAT Form</title>
 
     <!-- Signature Pad used by the existing signature functions -->
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
 
     <style>
         html {
@@ -3540,29 +3540,52 @@ placeholder="Enter text here:">
             var clearButton = document.getElementById(clearId);
             if (!canvas || !clearButton) return null;
 
+            // Keep a fixed CSS size, but scale the actual canvas bitmap for
+            // Retina/high-DPI displays. Signature Pad 4 uses getBoundingClientRect
+            // for touch coordinates, so the drawing follows the finger correctly
+            // even when the canvas is inside a table or responsive layout.
+            canvas.style.width = "400px";
+            canvas.style.height = "80px";
+            canvas.style.maxWidth = "100%";
+            canvas.style.touchAction = "none";
+
             var signaturePad = new SignaturePad(canvas, {
+                backgroundColor: "rgb(255,255,255)",
                 minWidth: 0.8,
                 maxWidth: 2.2,
-                backgroundColor: "rgb(255,255,255)"
+                throttle: 0
             });
 
             function resizeCanvas() {
                 var ratio = Math.max(window.devicePixelRatio || 1, 1);
                 var rect = canvas.getBoundingClientRect();
                 var data = signaturePad.isEmpty() ? null : signaturePad.toData();
+
                 canvas.width = Math.round(rect.width * ratio);
                 canvas.height = Math.round(rect.height * ratio);
-                var ctx = canvas.getContext("2d");
-                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-                if (data) signaturePad.fromData(data);
+
+                // Signature Pad 4 expects the backing canvas to be scaled.
+                canvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+
+                if (data) {
+                    signaturePad.fromData(data);
+                } else {
+                    signaturePad.clear();
+                }
             }
 
             resizeCanvas();
+
             clearButton.addEventListener("click", function(event) {
                 event.preventDefault();
                 signaturePad.clear();
             });
+
             window.addEventListener("resize", resizeCanvas);
+            window.addEventListener("orientationchange", function() {
+                setTimeout(resizeCanvas, 100);
+            });
+
             return signaturePad;
         }
 
@@ -3573,7 +3596,11 @@ placeholder="Enter text here:">
 
         document.getElementById('clear-document').addEventListener('click', function(event) {
             event.preventDefault();
-            document.querySelectorAll('input[type="text"]').forEach(function(input) { input.value = ''; });
+
+            document.querySelectorAll('input[type="text"]').forEach(function(input) {
+                input.value = '';
+            });
+
             signaturePad1.clear();
             signaturePad2.clear();
             signaturePad3.clear();
