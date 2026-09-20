@@ -111,6 +111,7 @@
             }
         }
     </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <button type="button" onclick="confirmRefresh()">Refresh Page</button>
@@ -3528,10 +3529,153 @@ placeholder="Enter text here:">
 </textarea><br><br>
 <div>
     <button type="button" onclick="window.print()">Print This Page</button>
+    <button type="button" id="save-pdf">Save as PDF</button>
     <button id="clear-document">Clear Document</button>
 </div>
 </form>
 </font>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var pdfButton = document.getElementById("save-pdf");
+
+        if (!pdfButton) return;
+
+        pdfButton.addEventListener("click", async function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (typeof html2pdf === "undefined") {
+                alert("The PDF function could not load. Please check your internet connection and try again.");
+                return;
+            }
+
+            var originalText = pdfButton.textContent;
+            pdfButton.textContent = "Creating PDF...";
+            pdfButton.disabled = true;
+
+            // Clone the form so the live form is never modified.
+            var source = document.querySelector("form");
+            if (!source) {
+                alert("Could not find the form.");
+                pdfButton.textContent = originalText;
+                pdfButton.disabled = false;
+                return;
+            }
+
+            var clone = source.cloneNode(true);
+            clone.id = "pdf-copy";
+
+            // Make the clone suitable for A4 PDF rendering.
+            clone.style.width = "180mm";
+            clone.style.maxWidth = "180mm";
+            clone.style.margin = "0 auto";
+            clone.style.background = "#fff";
+            clone.style.color = "#000";
+
+            // Copy current form values into the cloned controls.
+            var originalControls = source.querySelectorAll("input, textarea, select");
+            var clonedControls = clone.querySelectorAll("input, textarea, select");
+
+            originalControls.forEach(function(original, i) {
+                var copy = clonedControls[i];
+                if (!copy) return;
+
+                if (original.type === "radio" || original.type === "checkbox") {
+                    copy.checked = original.checked;
+                    if (copy.checked) copy.setAttribute("checked", "checked");
+                    else copy.removeAttribute("checked");
+                } else {
+                    copy.value = original.value;
+                    if (copy.tagName === "TEXTAREA") {
+                        copy.textContent = original.value;
+                    } else if (copy.tagName === "SELECT") {
+                        Array.from(copy.options).forEach(function(opt, j) {
+                            opt.selected = original.options[j].selected;
+                        });
+                    } else {
+                        copy.setAttribute("value", original.value);
+                    }
+                }
+            });
+
+            // Replace cloned canvases with images containing the actual signatures.
+            var originalCanvases = source.querySelectorAll("canvas");
+            var clonedCanvases = clone.querySelectorAll("canvas");
+
+            originalCanvases.forEach(function(canvas, i) {
+                var copy = clonedCanvases[i];
+                if (!copy) return;
+
+                try {
+                    var img = document.createElement("img");
+                    img.src = canvas.toDataURL("image/png");
+                    img.style.width = canvas.getBoundingClientRect().width + "px";
+                    img.style.height = canvas.getBoundingClientRect().height + "px";
+                    img.style.border = "1px solid #000";
+                    img.style.background = "#fff";
+                    copy.parentNode.replaceChild(img, copy);
+                } catch (e) {}
+            });
+
+            // Remove interactive buttons from the PDF.
+            clone.querySelectorAll("button").forEach(function(btn) {
+                btn.remove();
+            });
+
+            // Preserve the N/A hidden sections exactly as they appear on screen.
+            clone.querySelectorAll(".section-hidden").forEach(function(section) {
+                section.style.display = "none";
+            });
+
+            // Add the clone off-screen without affecting the user's live form.
+            var wrapper = document.createElement("div");
+            wrapper.style.position = "fixed";
+            wrapper.style.left = "-100000px";
+            wrapper.style.top = "0";
+            wrapper.style.width = "180mm";
+            wrapper.style.background = "#fff";
+            wrapper.appendChild(clone);
+            document.body.appendChild(wrapper);
+
+            var locationInput = source.querySelector('input[type="text"]');
+            var filename = "ELV-Junction-SAT";
+            if (locationInput && locationInput.value.trim()) {
+                filename += "-" + locationInput.value.trim().replace(/[^a-z0-9]+/gi, "-");
+            }
+            filename += ".pdf";
+
+            try {
+                await html2pdf().set({
+                    margin: [10, 10, 10, 10],
+                    filename: filename,
+                    image: { type: "jpeg", quality: 0.95 },
+                    html2canvas: {
+                        scale: 1.5,
+                        useCORS: true,
+                        backgroundColor: "#ffffff",
+                        logging: false
+                    },
+                    jsPDF: {
+                        unit: "mm",
+                        format: "a4",
+                        orientation: "portrait"
+                    },
+                    pagebreak: {
+                        mode: ["css", "legacy"]
+                    }
+                }).from(clone).save();
+            } catch (error) {
+                console.error(error);
+                alert("The PDF could not be created. Please try again.");
+            } finally {
+                wrapper.remove();
+                pdfButton.textContent = originalText;
+                pdfButton.disabled = false;
+            }
+        });
+    });
+</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
