@@ -90,7 +90,6 @@
 
     <script>
         window.addEventListener('beforeunload', function (e) {
-            if (window.__printing) return;
             var confirmationMessage = 'Are you sure you want to leave this page?';
             e.returnValue = confirmationMessage;
             return confirmationMessage;
@@ -3528,45 +3527,11 @@ placeholder="Enter text here:">
 placeholder="Enter text here:">
 </textarea><br><br>
 <div>
-    <button type="button" id="print-page">Print This Page</button>
-    <button type="button" id="clear-document">Clear Document</button>
+    <button type="button" onclick="window.print()">Print This Page</button>
+    <button id="clear-document">Clear Document</button>
 </div>
 </form>
 </font>
-
-<script>
-    // Dedicated print handler. iOS Safari can return from window.print()
-    // immediately and can also react badly to page lifecycle handlers.
-    document.addEventListener("DOMContentLoaded", function() {
-        var printButton = document.getElementById("print-page");
-
-        if (printButton) {
-            printButton.addEventListener("click", function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-
-                var savedScrollY = window.scrollY || window.pageYOffset || 0;
-
-                // Temporarily disable the beforeunload handler while printing.
-                // It is not needed for printing and can interfere with Safari's
-                // print lifecycle.
-                window.__printing = true;
-                printButton.blur();
-
-                setTimeout(function() {
-                    window.print();
-
-                    // Safari/iOS may return immediately, so restore the
-                    // original position shortly afterwards.
-                    setTimeout(function() {
-                        window.scrollTo(0, savedScrollY);
-                        window.__printing = false;
-                    }, 1000);
-                }, 150);
-            });
-        }
-    });
-</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
