@@ -1,83 +1,114 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Refresh</title>
-    <script>
-        window.addEventListener('beforeunload', function (e) {
-            var confirmationMessage = 'Are you sure you want to leave this page?';
-            e.returnValue = confirmationMessage; // Standard for most browsers
-            return confirmationMessage; // For some older browsers
-        });
+    <meta name="description" content="ELV Junction SAT Form">
+    <title>ELV Junction SAT Form</title>
 
-        function confirmRefresh() {
+    <!-- Signature Pad used by the existing signature functions -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script>
+
+    <style>
+        html {
+            font-family: Calibri, Arial, sans-serif;
+        }
+
+        body {
+            background-color: powderblue;
+            font-size: 10px;
+            margin: 12px;
+        }
+
+        .section-content { margin-top: 8px; }
+        .section-hidden { display: none; }
+
+        button {
+            cursor: pointer;
+            padding: 6px 10px;
+            margin: 2px;
+        }
+
+        textarea {
+            max-width: 100%;
+        }
+
+        canvas.signature-pad {
+            display: block;
+            width: 400px;
+            height: 80px;
+            touch-action: none;
+        }
+
+        /* Keep the existing form behaviour while making the page usable on smaller screens. */
+        @media screen and (max-width: 700px) {
+            body {
+                margin: 8px;
+                font-size: 12px;
+            }
+
+            h1 {
+                margin-left: 0 !important;
+                font-size: 24px;
+            }
+
+            table {
+                max-width: 100%;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            canvas.signature-pad {
+                width: 400px;
+                height: 80px;
+                max-width: 100%;
+                display: block;
+                touch-action: none;
+            }
+        }
+
+        /* GitHub Pages is only hosting the form. Printing creates the record. */
+        @media print {
+            .section-hidden { display: none !important; }
+            button { display: none !important; }
+            body {
+                background-color: white !important;
+                margin: 0;
+                font-size: 10px;
+            }
+            @page {
+                size: A4;
+                margin: 12mm;
+            }
+        }
+    </style>
+
+    <script>
+function confirmRefresh() {
             if (confirm("Are you sure you want to refresh the page?")) {
                 location.reload();
             }
         }
+
+        function toggleSection(cb, id){
+            var sec = document.getElementById(id);
+            if(!sec) return;
+            if(cb.checked){
+                sec.classList.add("section-hidden");
+            } else {
+                sec.classList.remove("section-hidden");
+            }
+        }
     </script>
-
-<style>
-.section-content { margin-top:8px; }
-.section-hidden { display:none; }
-@media print { .section-hidden { display:none !important; } }
-
-.signature-pad {
-    width: 400px;
-    height: 80px;
-    max-width: 100%;
-    display: block;
-    touch-action: none;
-    border: 1px solid #000000;
-    background: #ffffff;
-}
-</style>
-
-<script>
-function toggleSection(cb, id){
-    var sec = document.getElementById(id);
-    if(!sec) return;
-    if(cb.checked){
-        sec.classList.add("section-hidden");
-    } else {
-        sec.classList.remove("section-hidden");
-    }
-}
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-    <button onclick="confirmRefresh()">Refresh Page</button>
-</body>
-<body style="background-color:powderblue" font size="10px">
+    <button type="button" onclick="confirmRefresh()">Refresh Page</button>
 
-<head>
-	
-	<title>Junction SAT Form</title>
-	<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.2.0/dist/signature_pad.umd.min.js"></script> 
-
-<style>
-.section-content { margin-top:8px; }
-.section-hidden { display:none; }
-@media print { .section-hidden { display:none !important; } }
-</style>
-
-<script>
-function toggleSection(cb, id){
-    var sec = document.getElementById(id);
-    if(!sec) return;
-    if(cb.checked){
-        sec.classList.add("section-hidden");
-    } else {
-        sec.classList.remove("section-hidden");
-    }
-}
-</script>
-
-</head>
-
-<body>
 <font face="calibri">
 	<h1 style="margin-left: 5em;"> <u>ELV Junction SAT Form</u></h1>
 
@@ -3424,7 +3455,7 @@ A selection must also be sent to the comms team for the website and social media
 	
         <td>Signature:</td>
         <td>
-            <canvas class="signature-pad" id="signature-pad-1" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-1" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-1">Clear</button>
         </td>
     </tr>
@@ -3440,7 +3471,7 @@ A selection must also be sent to the comms team for the website and social media
     <tr>
         <td>Signature:</td>
         <td>
-            <canvas class="signature-pad" id="signature-pad-2" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-2" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-2">Clear</button>
         </td>
     </tr>
@@ -3453,7 +3484,7 @@ A selection must also be sent to the comms team for the website and social media
     <tr>
         <td>Signature:</td>
         <td>
-            <canvas class="signature-pad" id="signature-pad-3" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-3" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-3">Clear</button>
         </td>
     </tr>
@@ -3466,7 +3497,7 @@ A selection must also be sent to the comms team for the website and social media
     <tr>
         <td>Signature:</td>
         <td>
-            <canvas class="signature-pad" id="signature-pad-4" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-4" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-4">Clear</button>
         </td>
     </tr>
@@ -3491,210 +3522,85 @@ placeholder="Enter text here:">
 </textarea><br><br>
 <div>
     <button type="button" onclick="window.print()">Print This Page</button>
-    <button type="button" id="save-pdf">Save as PDF</button>
     <button id="clear-document">Clear Document</button>
 </div>
 </form>
-</font> 
+</font>
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var button = document.getElementById("save-pdf");
-    if (!button) return;
+    document.addEventListener("DOMContentLoaded", function() {
+        function setupSignaturePad(canvasId, clearId) {
+            var canvas = document.getElementById(canvasId);
+            var clearButton = document.getElementById(clearId);
+            if (!canvas || !clearButton) return null;
 
-    button.addEventListener("click", async function (event) {
-        event.preventDefault();
-        event.stopPropagation();
+            // Keep a fixed CSS size, but scale the actual canvas bitmap for
+            // Retina/high-DPI displays. Signature Pad 4 uses getBoundingClientRect
+            // for touch coordinates, so the drawing follows the finger correctly
+            // even when the canvas is inside a table or responsive layout.
+            canvas.style.width = "400px";
+            canvas.style.height = "80px";
+            canvas.style.maxWidth = "100%";
+            canvas.style.touchAction = "none";
 
-        if (typeof html2pdf === "undefined") {
-            alert("The PDF function could not load. Please check your internet connection.");
-            return;
-        }
-
-        var sourceForm = document.querySelector("form");
-        if (!sourceForm) return;
-
-        var oldText = button.textContent;
-        button.textContent = "Creating PDF...";
-        button.disabled = true;
-
-        // Create a normal, on-page-sized rendering surface.
-        // Keeping it at left=0 avoids html2canvas creating a giant blank
-        // canvas because the previous version was rendered at -100000px.
-        var wrapper = document.createElement("div");
-        wrapper.style.position = "absolute";
-        wrapper.style.left = "0";
-        wrapper.style.top = "0";
-        wrapper.style.width = "794px";
-        wrapper.style.background = "#fff";
-        wrapper.style.zIndex = "-1";
-        wrapper.style.pointerEvents = "none";
-
-        var clone = sourceForm.cloneNode(true);
-        clone.style.width = "760px";
-        clone.style.maxWidth = "760px";
-        clone.style.margin = "0 auto";
-        clone.style.background = "#fff";
-        clone.style.color = "#000";
-
-        // Copy live form values.
-        var originalControls = sourceForm.querySelectorAll("input, textarea, select");
-        var clonedControls = clone.querySelectorAll("input, textarea, select");
-
-        originalControls.forEach(function (original, i) {
-            var copy = clonedControls[i];
-            if (!copy) return;
-
-            if (original.type === "radio" || original.type === "checkbox") {
-                copy.checked = original.checked;
-            } else {
-                copy.value = original.value;
-                if (copy.tagName === "TEXTAREA") copy.textContent = original.value;
-            }
-        });
-
-        // Replace canvases with signature images.
-        var originalCanvases = sourceForm.querySelectorAll("canvas");
-        var clonedCanvases = clone.querySelectorAll("canvas");
-
-        originalCanvases.forEach(function (canvas, i) {
-            var copy = clonedCanvases[i];
-            if (!copy) return;
-
-            var img = document.createElement("img");
-            img.src = canvas.toDataURL("image/png");
-            img.style.width = "400px";
-            img.style.height = "80px";
-            img.style.border = "1px solid #000";
-            img.style.background = "#fff";
-            copy.parentNode.replaceChild(img, copy);
-        });
-
-        // Remove controls from the PDF.
-        clone.querySelectorAll("button").forEach(function (el) { el.remove(); });
-
-        // Keep the same N/A sections hidden in the PDF.
-        clone.querySelectorAll(".section-hidden").forEach(function (el) {
-            el.style.display = "none";
-        });
-
-        wrapper.appendChild(clone);
-        document.body.appendChild(wrapper);
-
-        var location = sourceForm.querySelector('input[type="text"]');
-        var filename = "ELV-Junction-SAT";
-        if (location && location.value.trim()) {
-            filename += "-" + location.value.trim().replace(/[^a-z0-9]+/gi, "-");
-        }
-        filename += ".pdf";
-
-        try {
-            await html2pdf().set({
-                margin: [10, 10, 10, 10],
-                filename: filename,
-                image: { type: "jpeg", quality: 0.95 },
-                html2canvas: {
-                    scale: 1.5,
-                    useCORS: true,
-                    backgroundColor: "#ffffff",
-                    scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: 794,
-                    logging: false
-                },
-                jsPDF: {
-                    unit: "mm",
-                    format: "a4",
-                    orientation: "portrait"
-                },
-                pagebreak: {
-                    mode: ["css", "legacy"]
-                }
-            }).from(clone).save();
-        } catch (error) {
-            console.error(error);
-            alert("The PDF could not be created.");
-        } finally {
-            wrapper.remove();
-            button.textContent = oldText;
-            button.disabled = false;
-        }
-    });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    function setupSignaturePad(canvasId, clearId) {
-        var canvas = document.getElementById(canvasId);
-        var clearButton = document.getElementById(clearId);
-        if (!canvas || !clearButton) return null;
-
-        var pad = new SignaturePad(canvas, {
-            backgroundColor: "rgb(255,255,255)",
-            minWidth: 0.8,
-            maxWidth: 2.2,
-            throttle: 0
-        });
-
-        function resizeCanvas() {
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            var rect = canvas.getBoundingClientRect();
-            var data = pad.isEmpty() ? null : pad.toData();
-
-            canvas.width = Math.round(rect.width * ratio);
-            canvas.height = Math.round(rect.height * ratio);
-
-            var ctx = canvas.getContext("2d");
-            ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-            if (data) {
-                pad.fromData(data);
-            } else {
-                pad.clear();
-            }
-        }
-
-        resizeCanvas();
-
-        clearButton.type = "button";
-        clearButton.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            pad.clear();
-        });
-
-        window.addEventListener("resize", resizeCanvas);
-        window.addEventListener("orientationchange", function () {
-            setTimeout(resizeCanvas, 100);
-        });
-
-        return pad;
-    }
-
-    window.signaturePad1 = setupSignaturePad("signature-pad-1", "clear-1");
-    window.signaturePad2 = setupSignaturePad("signature-pad-2", "clear-2");
-    window.signaturePad3 = setupSignaturePad("signature-pad-3", "clear-3");
-    window.signaturePad4 = setupSignaturePad("signature-pad-4", "clear-4");
-
-    var clearDocument = document.getElementById("clear-document");
-    if (clearDocument) {
-        clearDocument.type = "button";
-        clearDocument.addEventListener("click", function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            document.querySelectorAll('input[type="text"]').forEach(function (input) {
-                input.value = "";
+            var signaturePad = new SignaturePad(canvas, {
+                backgroundColor: "rgb(255,255,255)",
+                minWidth: 0.8,
+                maxWidth: 2.2,
+                throttle: 0
             });
 
-            [window.signaturePad1, window.signaturePad2, window.signaturePad3, window.signaturePad4]
-                .forEach(function (pad) {
-                    if (pad) pad.clear();
-                });
+            function resizeCanvas() {
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                var rect = canvas.getBoundingClientRect();
+                var data = signaturePad.isEmpty() ? null : signaturePad.toData();
+
+                canvas.width = Math.round(rect.width * ratio);
+                canvas.height = Math.round(rect.height * ratio);
+
+                // Signature Pad 4 expects the backing canvas to be scaled.
+                canvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+
+                if (data) {
+                    signaturePad.fromData(data);
+                } else {
+                    signaturePad.clear();
+                }
+            }
+
+            resizeCanvas();
+
+            clearButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                signaturePad.clear();
+            });
+
+            window.addEventListener("resize", resizeCanvas);
+            window.addEventListener("orientationchange", function() {
+                setTimeout(resizeCanvas, 100);
+            });
+
+            return signaturePad;
+        }
+
+        var signaturePad1 = setupSignaturePad("signature-pad-1", "clear-1");
+        var signaturePad2 = setupSignaturePad("signature-pad-2", "clear-2");
+        var signaturePad3 = setupSignaturePad("signature-pad-3", "clear-3");
+        var signaturePad4 = setupSignaturePad("signature-pad-4", "clear-4");
+
+        document.getElementById('clear-document').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            document.querySelectorAll('input[type="text"]').forEach(function(input) {
+                input.value = '';
+            });
+
+            signaturePad1.clear();
+            signaturePad2.clear();
+            signaturePad3.clear();
+            signaturePad4.clear();
         });
-    }
-});
+    });
 </script>
-
-
 </body>
 </html>
