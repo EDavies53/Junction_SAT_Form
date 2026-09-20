@@ -33,6 +33,13 @@
             max-width: 100%;
         }
 
+        canvas.signature-pad {
+            display: block;
+            width: 400px;
+            height: 80px;
+            touch-action: none;
+        }
+
         /* Keep the existing form behaviour while making the page usable on smaller screens. */
         @media screen and (max-width: 700px) {
             body {
@@ -56,9 +63,12 @@
                 box-sizing: border-box;
             }
 
-            canvas {
+            canvas.signature-pad {
+                width: 400px;
+                height: 80px;
                 max-width: 100%;
-                height: auto;
+                display: block;
+                touch-action: none;
             }
         }
 
@@ -3451,7 +3461,7 @@ A selection must also be sent to the comms team for the website and social media
 	
         <td>Signature:</td>
         <td>
-            <canvas id="signature-pad-1" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-1" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-1">Clear</button>
         </td>
     </tr>
@@ -3467,7 +3477,7 @@ A selection must also be sent to the comms team for the website and social media
     <tr>
         <td>Signature:</td>
         <td>
-            <canvas id="signature-pad-2" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-2" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-2">Clear</button>
         </td>
     </tr>
@@ -3480,7 +3490,7 @@ A selection must also be sent to the comms team for the website and social media
     <tr>
         <td>Signature:</td>
         <td>
-            <canvas id="signature-pad-3" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-3" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-3">Clear</button>
         </td>
     </tr>
@@ -3493,7 +3503,7 @@ A selection must also be sent to the comms team for the website and social media
     <tr>
         <td>Signature:</td>
         <td>
-            <canvas id="signature-pad-4" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <canvas id="signature-pad-4" class="signature-pad" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
             <button id="clear-4">Clear</button>
         </td>
     </tr>
@@ -3525,44 +3535,49 @@ placeholder="Enter text here:">
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var canvas1 = document.getElementById('signature-pad-1');
-        var signaturePad1 = new SignaturePad(canvas1);
-        document.getElementById('clear-1').addEventListener('click', function(event) {
-            event.preventDefault();
-            signaturePad1.clear();
-        });
+        function setupSignaturePad(canvasId, clearId) {
+            var canvas = document.getElementById(canvasId);
+            var clearButton = document.getElementById(clearId);
+            if (!canvas || !clearButton) return null;
 
-        var canvas2 = document.getElementById('signature-pad-2');
-        var signaturePad2 = new SignaturePad(canvas2);
-        document.getElementById('clear-2').addEventListener('click', function(event) {
-            event.preventDefault();
-            signaturePad2.clear();
-        });
-
-        var canvas3 = document.getElementById('signature-pad-3');
-        var signaturePad3 = new SignaturePad(canvas3);
-        document.getElementById('clear-3').addEventListener('click', function(event) {
-            event.preventDefault();
-            signaturePad3.clear();
-        });
-		
-		var canvas4 = document.getElementById('signature-pad-4');
-        var signaturePad4 = new SignaturePad(canvas4);
-        document.getElementById('clear-4').addEventListener('click', function(event) {
-            event.preventDefault();
-            signaturePad4.clear();
-        });
-		        document.getElementById('clear-document').addEventListener('click', function(event) {
-            event.preventDefault();
-            // Clear all input fields
-            document.querySelectorAll('input[type="text"]').forEach(function(input) {
-                input.value = '';
+            var signaturePad = new SignaturePad(canvas, {
+                minWidth: 0.8,
+                maxWidth: 2.2,
+                backgroundColor: "rgb(255,255,255)"
             });
-            // Clear all signature pads
+
+            function resizeCanvas() {
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                var rect = canvas.getBoundingClientRect();
+                var data = signaturePad.isEmpty() ? null : signaturePad.toData();
+                canvas.width = Math.round(rect.width * ratio);
+                canvas.height = Math.round(rect.height * ratio);
+                var ctx = canvas.getContext("2d");
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+                if (data) signaturePad.fromData(data);
+            }
+
+            resizeCanvas();
+            clearButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                signaturePad.clear();
+            });
+            window.addEventListener("resize", resizeCanvas);
+            return signaturePad;
+        }
+
+        var signaturePad1 = setupSignaturePad("signature-pad-1", "clear-1");
+        var signaturePad2 = setupSignaturePad("signature-pad-2", "clear-2");
+        var signaturePad3 = setupSignaturePad("signature-pad-3", "clear-3");
+        var signaturePad4 = setupSignaturePad("signature-pad-4", "clear-4");
+
+        document.getElementById('clear-document').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelectorAll('input[type="text"]').forEach(function(input) { input.value = ''; });
             signaturePad1.clear();
             signaturePad2.clear();
             signaturePad3.clear();
-			signaturePad4.clear();
+            signaturePad4.clear();
         });
     });
 </script>
