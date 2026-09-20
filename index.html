@@ -73,7 +73,26 @@
         }
 
         /* GitHub Pages is only hosting the form. Printing creates the record. */
+        .signature-print-image {
+            display: none;
+        }
+
         @media print {
+            .signature-print-image {
+                display: block !important;
+                width: 400px !important;
+                height: 80px !important;
+                max-width: none !important;
+                min-width: 400px !important;
+                max-height: none !important;
+                min-height: 80px !important;
+                object-fit: fill;
+            }
+
+            canvas.signature-pad {
+                display: none !important;
+            }
+
             .section-hidden { display: none !important; }
             button { display: none !important; }
             body {
@@ -3570,9 +3589,14 @@ placeholder="Enter text here:">
 
             resizeCanvas();
 
+            clearButton.type = "button";
             clearButton.addEventListener("click", function(event) {
                 event.preventDefault();
+                event.stopPropagation();
                 signaturePad.clear();
+
+                var printImage = canvas.parentNode.querySelector(".signature-print-image");
+                if (printImage) printImage.src = "";
             });
 
             window.addEventListener("resize", resizeCanvas);
@@ -3588,6 +3612,46 @@ placeholder="Enter text here:">
         var signaturePad3 = setupSignaturePad("signature-pad-3", "clear-3");
         var signaturePad4 = setupSignaturePad("signature-pad-4", "clear-4");
 
+        function createPrintSignature(canvasId) {
+            var canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+
+            var img = document.createElement("img");
+            img.className = "signature-print-image";
+            img.width = 400;
+            img.height = 80;
+
+            try {
+                img.src = canvas.toDataURL("image/png");
+            } catch (e) {}
+
+            canvas.parentNode.insertBefore(img, canvas.nextSibling);
+        }
+
+        function syncPrintSignature(canvasId) {
+            var canvas = document.getElementById(canvasId);
+            var img = canvas && canvas.parentNode.querySelector(".signature-print-image");
+            if (!canvas || !img) return;
+            try { img.src = canvas.toDataURL("image/png"); } catch (e) {}
+        }
+
+        createPrintSignature("signature-pad-1");
+        createPrintSignature("signature-pad-2");
+        createPrintSignature("signature-pad-3");
+        createPrintSignature("signature-pad-4");
+
+        ["1", "2", "3", "4"].forEach(function(n) {
+            var canvas = document.getElementById("signature-pad-" + n);
+            if (canvas) {
+                canvas.addEventListener("pointerup", function() {
+                    syncPrintSignature("signature-pad-" + n);
+                });
+                canvas.addEventListener("touchend", function() {
+                    syncPrintSignature("signature-pad-" + n);
+                });
+            }
+        });
+
         document.getElementById('clear-document').addEventListener('click', function(event) {
             event.preventDefault();
 
@@ -3599,6 +3663,10 @@ placeholder="Enter text here:">
             signaturePad2.clear();
             signaturePad3.clear();
             signaturePad4.clear();
+
+            document.querySelectorAll(".signature-print-image").forEach(function(img) {
+                img.src = "";
+            });
         });
     });
 </script>
