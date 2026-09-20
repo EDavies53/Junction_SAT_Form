@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ELV Junction SAT Form">
+    <title>ELV Junction SAT Form</title>
+
+    <!-- Signature Pad used by the existing signature functions -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
+    <style>
+        html {
+            font-family: Calibri, Arial, sans-serif;
+        }
+
+        body {
+            background-color: powderblue;
+            font-size: 10px;
+            margin: 12px;
+        }
+
+        .section-content { margin-top: 8px; }
+        .section-hidden { display: none; }
+
+        button {
+            cursor: pointer;
+            padding: 6px 10px;
+            margin: 2px;
+        }
+
+        textarea {
+            max-width: 100%;
+        }
+
+        /* Keep the existing form behaviour while making the page usable on smaller screens. */
+        @media screen and (max-width: 700px) {
+            body {
+                margin: 8px;
+                font-size: 12px;
+            }
+
+            h1 {
+                margin-left: 0 !important;
+                font-size: 24px;
+            }
+
+            table {
+                max-width: 100%;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            canvas {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        /* GitHub Pages is only hosting the form. Printing creates the record. */
+        @media print {
+            .section-hidden { display: none !important; }
+            button { display: none !important; }
+            body {
+                background-color: white !important;
+                margin: 0;
+                font-size: 10px;
+            }
+            @page {
+                size: A4;
+                margin: 12mm;
+            }
+        }
+    </style>
+
+    <script>
+        window.addEventListener('beforeunload', function (e) {
+            var confirmationMessage = 'Are you sure you want to leave this page?';
+            e.returnValue = confirmationMessage;
+            return confirmationMessage;
+        });
+
+        function confirmRefresh() {
+            if (confirm("Are you sure you want to refresh the page?")) {
+                location.reload();
+            }
+        }
+
+        function toggleSection(cb, id){
+            var sec = document.getElementById(id);
+            if(!sec) return;
+            if(cb.checked){
+                sec.classList.add("section-hidden");
+            } else {
+                sec.classList.remove("section-hidden");
+            }
+        }
+    </script>
+</head>
+<body>
+    <button type="button" onclick="confirmRefresh()">Refresh Page</button>
+
+<font face="calibri">
+	<h1 style="margin-left: 5em;"> <u>ELV Junction SAT Form</u></h1>
+
+
+<form>
+<table>
+	<tr>
+		<td>Location:</td>
+		<td><input type="text" Location="" size="60"></td>
+	</tr>
+	<tr>
+		<td>Site Ref:</td>
+		<td><input type="text" Site Ref=""></td>
+	</tr>
+	<tr>
+		<td>Date:</td>
+		<td><input type="date" ></td>
+	</tr>
+</table>
+<br><br>
+<p>The commissioning of traffic signals can be divided into three parts.<br>
+1.The EPROM test of the controller<br>
+2.The checks that can be carried out before the controller is switched on<br>
+3.The checks that can be carried out after the controller is switched on<br>
+Note:- UTC Site - Remember to print off the relevant OTU Details / Commissioning Sheet and Control Reply Sheet
+<br>
+<b>Part 1</b> should be carried out in accordance with TR2500A data sheets and is not covered in this document<br>
+<b>Part 2</b> can be carried out in the absence of the signal company Engineer and it is suggested that this is carried out before they arrive on site. One hour upwards should be allowed for this.<br>
+<b>Part 3</b> should be carried out in the presence of a signal company Engineer<br></p>
+<h2>Part 1: EPROM test</h2>
+<table>
+<td width="350px"></td>
+	<tr>
+		<td>Has this been carried out by an approved engineer?</td>
+		<td>
+		<input type="radio" name="Has this been carried out by an approved engineer?">YES
+		<input type="radio" name="Has this been carried out by an approved engineer?">NO
+		<input type="radio" name="Has this been carried out by an approved engineer?">N/A
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<td>
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="17"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>Intergreen checked against approval drawing?</td>
+		<td>
+		<input type="radio" name="Intergeen checked against approval drawing?">YES
+		<input type="radio" name="Intergeen checked against approval drawing?">NO
+		<input type="radio" name="Intergeen checked against approval drawing?">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<td>
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="17"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>Green conflicts checked?</td>
+		<td>
+		<input type="radio" name="Green conflicts checked?">YES
+		<input type="radio" name="Green conflicts checked?">NO
+		<input type="radio" name="Green conflicts checked?">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<td>
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="17"></textarea>
+		</td>
+	</tr>
+</table>
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+
+
+<h2>Part 2: Controller Switched off</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>
+		Obtain an earth loop impedance (ELI) test reading for the installation and record
+		the value below.  This value must also be recorded on the electrical test certificate
+		supplied by the traffic signal engineer. The test can be carried out at the controller
+		and must be witnessed at the SAT. Pre-recorded readings must not be accepted.
+		</td>
+	</tr>
+</table>
+<table><td width="550px"></td>
+	<tr align="right"><td>ELI reading at controller:<input type="text" ELI Reading at controller="" size="5">ohms
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	
+</table>
+<table><td width="550px" align="center"></td>
+<tr>
+		<td><strong>NOTE: If the installation does not have a satisfactory ELI reading
+		then the signals MUST BE LEFT OFF and isolated from the incoming mains supply</Strong></td>
+		
+	</tr>
+</table><br>
+<table>
+<td width="550px"></td>
+<tr>
+		<td>Check the correct fuse has been fitted to the electricity board cut-out in the mini pillar</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="cutout">YES
+		<input type="radio" name="cutout">NO
+		<input type="radio" name="cutout">N/A
+		</td>
+	</tr>
+	<tr>
+		<td align="right">Fuse rating:<input type="text" Fuse rating="" size="5">A</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that a secondary double pole isolator and fuse have been fitted within the mini pillar. This fuse must be smaller value than the electricity board cut-out fuse and larger than the controller fuse.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="cutout">YES
+		<input type="radio" name="cutout">NO
+		<input type="radio" name="cutout">N/A
+		</td>
+	</tr>
+	<tr>
+		<td align="right">Fuse rating:<input type="text" Fuse rating="" size="5">A</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check all earth connections (including outer cabinet) have been made to the main earth terminal (MET) within the mini pillar, and that the MET is connected to the neutral of the electricity board cut-out</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="met">YES
+		<input type="radio" name="met">NO
+		<input type="radio" name="met">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check earth connections are in place from controller to the mini pillar.  The earth core within the mains cable and the steel wire armouring should be connected at both ends to the MET's located within the mini pillar and controller.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="earth">YES
+		<input type="radio" name="earth">NO
+		<input type="radio" name="earth">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that the twin 5 amp switched socket with RCD is left unoccupied and does not have any ancillary equipment plugged into it</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="socket">YES
+		<input type="radio" name="socket">NO
+		<input type="radio" name="socket">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</B> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Layout</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>Has signal approval been issued?</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="SA">YES
+		<input type="radio" name="SA">NO
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Ensure a full size plot is left in the controller cabinet including signed approval front sheet.</td>
+		</tr>
+	<tr><td>
+		<input type="checkbox" name="plot">Complete
+		</td>
+	</tr>
+</table>
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Signal Poles</h2>
+At each signal pole location, the following should be checked<br>
+<table><td width="550px"></td>
+	<tr>
+		<td>The location of the poles and associated equipment shall agree with the signal approval drawing</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="location">YES
+		<input type="radio" name="location">NO
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Height of amber lens above the pavement shall be 2.4m to 4.0m.  The height may be limited to 2.65m to 3.1m as specified by ECC.  It will be easier to measure to the bottom of the signal head body whereupon these measuremnts become 2.1m to 2.55m</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="amber">YES
+		<input type="radio" name="amber">NO
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Height of centre of amber lens above carriageway when fitted to a mast arm, catenaries etc shall be 6.1m to 9.0m</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mast">YES
+		<input type="radio" name="mast">NO
+		<input type="radio" name="mast">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Height of far sided pedestrian signal head above pavement shall be 2.1m to 2.6m (measured to bottom of signal head body)</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="farsided">YES
+		<input type="radio" name="farsided">NO
+		<input type="radio" name="farsided">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that the correct visors are used at primary and secondary signal head locations</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="visors">YES
+		<input type="radio" name="visors">NO
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that backing boards are secured at all four corners</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="backing">YES
+		<input type="radio" name="backing">NO
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>The arrangement of green arrow aspects within the signal heads and the directions shown by the green arrow shall comply with Schedule 14 part 3 of the Traffic Signs Regulations and General Directions and all other relevant regulations</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="gA">YES
+		<input type="radio" name="gA">NO
+		<input type="radio" name="gA">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>When a 4-in-line signal head contains 2 green arrows and traffic may filter against a red signal, the lower green arrow should appear as the filter</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="4">YES
+		<input type="radio" name="4">NO
+		<input type="radio" name="4">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Signs to diagram 606 (white arrow on blue background)incorporated in a signal head. Arrow may point in any direction through 180 degrees above the horizontal</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="606">YES
+		<input type="radio" name="606">NO
+		<input type="radio" name="606">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>All signs to diagram 606 mandatory, 612, 613, & 614 prohibitory within the signal heads shall be internally illuminated at all times on independent circuits to the signals aspects</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="612">YES
+		<input type="radio" name="612">NO
+		<input type="radio" name="612">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Ensure that if secret signs are installed, that they are only illuminated during configured hours of the day.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ss">YES
+		<input type="radio" name="ss">NO
+		<input type="radio" name="ss">N/A
+		</td>
+	</tr>
+			<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check clearance between signal heads and carriageway is minimum of 460mm</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="460">YES
+		<input type="radio" name="460">NO
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Direct buried signal poles to be firmly located within a concrete foundation</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="direct">YES
+		<input type="radio" name="direct">NO
+		<input type="radio" name="direct">N/A
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Pole sockets shall be permanently installed in accordance with manufacturers instructions.  The top of the socket should not be covered with grass or other materials.  The fixing bolts should be on the furthest side away from the road.  Any deviation to this should be identified on the as-built drawing.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="nal">YES
+		<input type="radio" name="nal">NO
+		<input type="radio" name="nal">N/A
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all poles have been numbered and are the colour as specified on the signal approval drawing</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="number">YES
+		<input type="radio" name="number">NO
+		
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Traffic signal poles should have low level terminations accessible from ground level. The poles shall be 114mm in diameter at the base and installed within a standard RS115 NAL socket but will have a wide base section to house the termination unit. The pole must be fitted with a vented pole cap.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ll">YES
+		<input type="radio" name="ll">NO
+		<input type="radio" name="ll">N/A
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Termination units should be within an enclosure designed to IP65 which protects against water and dust ingress.  Incoming cables should be within the correct sized gland to ensure the integrity of the unit.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ip65">YES
+		<input type="radio" name="ip65">NO
+		<input type="radio" name="ip65">N/A
+		</td>
+	</tr>
+		<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Poles should be orientated so that the access door faces the rear of the footway or towards the tactile paving depending on what has been specified on the signal approval drawing</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="door">YES
+		<input type="radio" name="door">NO
+		<input type="radio" name="door">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	<br>
+<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+<h2>Associated Signs
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-associated-signs')">
+</label>
+</h2>
+<div id="sec-associated-signs" class="section-content">
+
+<table><td width="550px"></td>
+	<tr>
+		<td>Signs to diagram 616 mandatory, 612, 613, 614 prohibitory, 616 no entry, 620 exemptions 
+buses and coaches and road markings to diagram 1046, no entry should be supported by an 
+act of parliament, order, regulations bye-law or notice.  (Not applicable to signs 612, 613 and 
+614 if supported by a green arrow on the same signal head.)
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="616">YES
+		<input type="radio" name="616">NO
+		<input type="radio" name="616">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Signs to diagram 543 traffic signals ahead, 572, 573 associated distance plates, 616 no entry, 620 exemptions buses and coaches within 50m of street lamp shall be illuminated during the hours of darkness, otherwise they shall be reflectorised.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="543">YES
+		<input type="radio" name="543">NO
+		<input type="radio" name="543">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>If applicable, check that 7014 signs have been installed where required in accordance with design.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="7014">YES
+		<input type="radio" name="7014">NO
+		<input type="radio" name="7014">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Loop Detection
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-loop-detection')">
+</label>
+</h2>
+<div id="sec-loop-detection" class="section-content">
+
+<table><td width="550px"></td>
+	<tr>
+		<td>Check the positioning of the detector loops.  The measurements should be taken from the stop line to
+the nearest part of the loop to the kerb.  With speed measuring loops the measurement is to the leading
+edge (on approach side) of the loop nearest the stop line.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="loopp">YES
+		<input type="radio" name="loopp">NO
+		<input type="radio" name="loopp">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all loop slots and underkerbs are backfilled to carriageway surface level.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="bf">YES
+		<input type="radio" name="bf">NO
+		<input type="radio" name="bf">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<p style="page-break-before: always">
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Markings
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-markings')">
+</label>
+</h2>
+<div id="sec-markings" class="section-content">
+
+<table><td width="550px"></td>
+	<tr>
+		<td>The two rows of pedestrian studs must not be less than 2.4m and no more than 5.0m apart for crossings.
+
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="stud">YES
+		<input type="radio" name="stud">NO
+		<input type="radio" name="stud">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Individual studs in a row should not be less than 250mm and not more than 720mm apart and a 
+maximum of 1.3m from the kerb</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="studs">YES
+		<input type="radio" name="studs">NO
+		<input type="radio" name="studs">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Pedestrian push button unit must be within 500mm of crossing studs</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="studs">YES
+		<input type="radio" name="studs">NO
+		<input type="radio" name="studs">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+
+<table><td width="550px"></td>
+	<tr>
+		<td>Stop lines shall be 200mm wide in urban areas.  300mm wide stop lines shall be provided in 
+rural areas, or where the 85th percentile exceeds 35mph</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="sl">YES
+		<input type="radio" name="sl">NO
+		<input type="radio" name="sl">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that other road markings agree with the signal approval plan</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="sap">YES
+		<input type="radio" name="sap">NO
+		<input type="radio" name="sap">N/A
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Civil Works
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-civil-works')">
+</label>
+</h2>
+<div id="sec-civil-works" class="section-content">
+
+<table><td width="550px"></td>
+	<tr>
+		<td>Trenches shall be permanently reinstated with asphalt and any paving slabs re-laid where appropriate.
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="trench">YES
+		<input type="radio" name="trench">NO
+		<input type="radio" name="trench">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Guard railing shall be permanently reinstated in the correct position. PGR should terminate 100mm from pole
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pgr">YES
+		<input type="radio" name="pgr">NO
+		<input type="radio" name="pgr">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Dropped kerbs shall be provided at all pedestrian crossing points.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="dk">YES
+		<input type="radio" name="dk">NO
+		<input type="radio" name="dk">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check Tactile Paving layout is in accordance with the signal approval drawing.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="tac">YES
+		<input type="radio" name="tac">NO
+		<input type="radio" name="tac">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Any old road markings shall be removed.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="old">YES
+		<input type="radio" name="old">NO
+		<input type="radio" name="old">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check all Civil items on site to include in the as-built drawing and accurately note any variations from the signal approval drawing..</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="asbuilt">YES
+		<input type="radio" name="asbuilt">NO
+		<input type="radio" name="asbuilt">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>If specified, High Friction surfacing or high PSV inlay to be in accordance with signal approval drawing.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="hfs">YES
+		<input type="radio" name="hfs">NO
+		<input type="radio" name="hfs">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check chambers located in verges have a minimum 150mm concrete surround.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="150">YES
+		<input type="radio" name="150">NO
+		<input type="radio" name="150">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Chambers should be fully secured with fixing screws on each corner with the frame correctly installed to prevent gaps between frame and cover.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="screw">YES
+		<input type="radio" name="screw">NO
+		<input type="radio" name="screw">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>If carriageway loop boxes have been installed, they should be permanently installed with the top flush with
+the carriageway level. Loop boxes should be installed offset from kerb or beside kerb as designed.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="clb">YES
+		<input type="radio" name="clb">NO
+		<input type="radio" name="clb">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<p style="page-break-before: always">
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div><h2>Controller</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that each pole has been individually cabled from the controller and that poles are not linked. 
+Cables should have at least 25% spare capacity or 4 cores at the time of installation.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="25">YES
+		<input type="radio" name="25">NO
+		<input type="radio" name="25">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all signal and loop feeder cables are marked with their destination at both ends. All controller
+cables to be flagged as appropriate. Check 25% of low level termination panels for destination markings.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="dest">YES
+		<input type="radio" name="dest">NO
+		<input type="radio" name="dest">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that the controller cabinet has been identified with its junction reference number (which 
+should be visible from the carriageway).</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="crn">YES
+		<input type="radio" name="crn">NO
+		<input type="radio" name="crn">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>For controllers without an NAL base, the controller shall be sealed with a two-part epoxy resin. 
+(NOTE: - This must be done before or at the time of commissioning. If BT connections still to be made, 
+base seal must still be installed and then broken out at later date.)</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="resin">YES
+		<input type="radio" name="resin">NO
+		<input type="radio" name="resin">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>For controllers with an NAL base, cables shall be within individual rubber grommets and any unused holes
+shall have a rubber grommet fitted to maintain the integrity of the base. Multiple cables should not share 
+the same rubber grommet.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="grom">YES
+		<input type="radio" name="grom">NO
+		<input type="radio" name="grom">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>The controller cabinet is to be of the colour as stated on the Traffic Signal Approval Drawing and shall
+have a DFM Lamp fitted and installed so that it can be readily seen from the road</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="lamp">YES
+		<input type="radio" name="lamp">NO
+		<input type="radio" name="Lamp">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td> Check that the 4G antenna has been installed on the top of the controller cabinet</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="lamp">YES
+		<input type="radio" name="lamp">NO
+		<input type="radio" name="Lamp">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+
+<table><td width="550px"></td>
+	<tr>
+		<td>The controller cabinet shall be supplied with one key of each type required to gain access to all parts of the
+controller as specified in the 12-5 specification.  The keys shall be taken and stored by the Essex Highways representative.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="key">YES
+		<input type="radio" name="key">NO
+		<input type="radio" name="key">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Controller documentation and site drawings shall be stored in a suitable protective and waterproof pocket
+facility to be provided by the Contractor within the controller. The signal contractor should also provide a laminated A3 copy of the signal approval drawing.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="wpw">YES
+		<input type="radio" name="wpw">NO
+		<input type="radio" name="wpw">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+
+<h2>Miscellaneous</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>Verify with Installation Contractor that draw cords have been left in ducts. Check 25% of chambers.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="25">YES
+		<input type="radio" name="25">NO
+		<input type="radio" name="25">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+	
+<h2>Part 3: Controller Switch On</h2>
+<table><td width="550px"></td>
+	<tr>
+	
+		<td>Prior to switching controller on, flash out each vehicle aspect, pedestrian green man, pedestrian red man,
+and wait indicator to ensure they illuminate when activated by the Installation Contractor.  The aspects
+must be flashed individually in a safe manner.  Sequence flashing should not be used.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="flash">YES
+		<input type="radio" name="flash">NO
+		<input type="radio" name="flash">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Switch signals on and check that correct traffic movements take place in each stage. Be ready 
+to switch signals off if unexpected traffic movements take place and investigate accordingly.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="unex">YES
+		<input type="radio" name="unex">NO
+		<input type="radio" name="unex">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all aspects on each approach are operating and in the correct sequence.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="seq">YES
+		<input type="radio" name="seq">NO
+		<input type="radio" name="seq">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all far-sided/near-sided pedestrian aspects are working and in the correct sequence.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="seq2">YES
+		<input type="radio" name="seq2">NO
+		<input type="radio" name="seq2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Signal head Alignment & Illumination</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>The primary signal heads shall be aligned as follows:-
+On a high speed approach at a point 1.5m above the carriageway on the centre line 200m from 
+the signals.  Otherwise, at a point 1.5m above carriageway on the centre line 50m from the stop line.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="align">YES
+		<input type="radio" name="align">NO
+		<input type="radio" name="align">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>On each approach the height of the centre of the amber lens of each signal head above the 
+carriageway shall be the same.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="hamb">YES
+		<input type="radio" name="hamb">NO
+		<input type="radio" name="hamb">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>The secondary signal heads should be angled towards a point 1.5m above the carriageway in 
+the nearside channel of approach 25m from the stop line.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="seco">YES
+		<input type="radio" name="seco">NO
+		<input type="radio" name="seco">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Far-sided pedestrian signal heads should be directed to the centre of the crossing at the opposite kerb</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="direc">YES
+		<input type="radio" name="direc">NO
+		<input type="radio" name="direc">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+
+<table><td width="550px"></td>
+	<tr>
+		<td>Near-sided pedestrian signal heads should be angled at an angle where the aspect is clearly
+visible at the point where pedestrians normally wait to cross.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="angle">YES
+		<input type="radio" name="angle">NO
+		<input type="radio" name="angle">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Controller Operation</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check operation of signal dimming by covering PE cell and observing signal aspects or the controller log. Dimming voltage shall be in the range of 27.5v.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="opo">YES
+		<input type="radio" name="opo">NO
+		<input type="radio" name="opo">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that the PE cell has been installed on the correct pole and is not beneath a lamp column or tree.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pe">YES
+		<input type="radio" name="pe">NO
+		<input type="radio" name="pe">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that the controller is operating in the correct mode.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mode">YES
+		<input type="radio" name="mode">NO
+		<input type="radio" name="mode">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check controller clock is set at correct time, day and week number.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="wn">YES
+		<input type="radio" name="wn">NO
+		<input type="radio" name="wn">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check correct week number is set for BST advance and retard where applicable.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="bst">YES
+		<input type="radio" name="bst">NO
+		<input type="radio" name="bst">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Detection</h2>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check operation of detector loops or magnetometers by observing operation of detector unit channels.  
+The detector channel LED's should illuminate as vehicles pass over the detector loops / magnetometer.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="led">YES
+		<input type="radio" name="led">NO
+		<input type="radio" name="led">N/A
+		</td>
+	</tr>	
+</table>
+<table><td width="550px"></td>
+	<tr><td align="right">Number of detector cards:<input type="text" Number of detector cards="" size="5"></td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	
+</table>
+<table><td width="550px"></td>
+	<tr>
+		<td>There shall be a permanent record of which detector channels are used by each detector. This shall take the form of a weatherproof table attached to the inside of the controller door. This label shall not compromise the environmental seal of the controller.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="card">YES
+		<input type="radio" name="card">NO
+		<input type="radio" name="card">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that detector units are set to the appropriate setting for sensitivity and detuning time.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="sens">YES
+		<input type="radio" name="sens">NO
+		<input type="radio" name="sens">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all loop feeder cables are not hard-wired direct to the detector backplane.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="bp">YES
+		<input type="radio" name="bp">NO
+		<input type="radio" name="bp">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check operation and alignment of above ground vehicle detectors.  The LED indicator on the detector should illuminate when approaching vehicles are 39m from stop line (minimum), unless site constraints
+prevent this from being achieved.  In this instance, the designer should determine the appropriate detection
+range.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="39">YES
+		<input type="radio" name="39">NO
+		<input type="radio" name="39">N/A
+		</td>
+	</tr>
+</table>
+<table><td width="550px"></td>
+	<tr><td align="right">MVD Model Number:<input type="text" MVD Model number="" size="15"></td>
+	
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	</table>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that stop line above ground detectors operate when a vehicle is stationary at the stop line.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="sld">YES
+		<input type="radio" name="sld">NO
+		<input type="radio" name="sld">N/A
+		</td>
+	</tr>
+</table>
+<table><td width="550px"></td>
+	<tr><td align="right">Stop Line detector model number:<input type="text" Stop Line detector model number="" size="15"></td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	</table>
+<table><td width="550px"></td>
+	<tr>
+		<td>Above ground detector cables should be neatly zip-tied or wrapped to top signal head bracket, with no
+cables hanging loose.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="zip">YES
+		<input type="radio" name="zip">NO
+		<input type="radio" name="zip">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that detector channels & AGD's are correctly connected to the controller logic by checking
+the controller or handset display against the detector, unit display or vehicle passing over the detector loops.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="agd">YES
+		<input type="radio" name="agd">NO
+		<input type="radio" name="agd">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that any unidirectional loops operate in the correct order.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ud">YES
+		<input type="radio" name="ud">NO
+		<input type="radio" name="ud">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Ensure above ground detectors are wired in using plugs and sockets. If the detectors are hardwired in
+ please note as an outstanding issue at the end of this commissioning sheet.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="plug">YES
+		<input type="radio" name="plug">NO
+		<input type="radio" name="plug">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Any above ground detectors for vehicles or pedestrians are to be mounted with an unobscured field
+of detection.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="unob">YES
+		<input type="radio" name="unob">NO
+		<input type="radio" name="unob">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+<h2>Magnetometer
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-magnetometer')">
+</label>
+</h2>
+<div id="sec-magnetometer" class="section-content">
+
+<table><td width="550px"></td>
+	<tr>
+		<td>Magnetometer access points and repeaters should be installed on poles as identified on the signal approval
+drawing. </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mag1">YES
+		<input type="radio" name="mag1">NO
+		<input type="radio" name="mag1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Magnetometer installation software (e.g. TrafficDot) to be used to monitor two RF link indicators:
+<br>
+▪RSSI (Received Signal Strength Indicator) of all RF links should be better than -80dBm
+<br>
+▪LQI (Link Quality Indicator) should be >90, typical value will be between 90 and 95
+<br>
+A low LQI in presence of strong RSSI indicates some form of local interference. A channel change can improve performance</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mag2">YES
+		<input type="radio" name="mag2">NO
+		<input type="radio" name="mag2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>With the discover mode set to 'On', the following battery voltages are to be checked:
+<br>
+▪ Sensor battery voltage must be >3.0 volts (typical value is 3.6 volts)
+<br>
+▪ Repeater battery voltage must be > 2.8 volts (typical value is 3.0 volts)</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mag3">YES
+		<input type="radio" name="mag3">NO
+		<input type="radio" name="mag3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<p style="page-break-before: always">
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div><h2>Pushbuttons</h2>
+<table><td width="550px"></td>
+	<tr><td>Check push buttons operate and illuminate wait indicators.  The wait indicator should go off when the
+ green man comes on and should not operate when the green man is showing.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pb1">YES
+		<input type="radio" name="pb1">NO
+		<input type="radio" name="pb1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check push buttons demand the correct phase(s) by checking via the appropriate controller
+handset command. </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pb2">YES
+		<input type="radio" name="pb2">NO
+		<input type="radio" name="pb2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Push buttons should be installed so that the centre of the push button is between 1.05-1.1m above finished
+ground level.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pb3">YES
+		<input type="radio" name="pb3">NO
+		<input type="radio" name="pb3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>With assistance from signal contractor check within pedestrian demand units or combined nearside units
+that the audible units are installed correctly. Check in particular the audible unit bracket is installed the 
+'correct way around' as not to cause a short against the wait PCB.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pb4">YES
+		<input type="radio" name="pb4">NO
+		<input type="radio" name="pb4">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Puffin / Toucan Facilities</h2>
+<table><td width="550px"></td>
+	<tr><td>Check that all Kerbside detectors are set up to detect within the area that is occupied by pedestrians
+waiting to cross. Ensure the detection area covers at least the push button and the front two rows of the
+tactile paving.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt1">YES
+		<input type="radio" name="pt1">NO
+		<input type="radio" name="pt1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Carry out tests to ensure the Kerbside detectors call and cancel pedestrian demands, including a latched
+test without a kerbside detect.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt2">YES
+		<input type="radio" name="pt2">NO
+		<input type="radio" name="pt2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Check that all On-crossing detectors are set up and aligned to detect the full width of the crossing carpet.
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt3">YES
+		<input type="radio" name="pt3">NO
+		<input type="radio" name="pt3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td><b>PUFFINS & NEARSIDE TOUCANS </b>- Carry out tests to ensure the On-crossing
+detectors extend the All Red period.
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt4">YES
+		<input type="radio" name="pt4">NO
+		<input type="radio" name="pt4">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td><b>FAR SIDED TOUCANS </b>- Carry out tests to ensure the On-crossing detectors extend the
+Blackout period.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt5">YES
+		<input type="radio" name="pt5">NO
+		<input type="radio" name="pt5">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td>Nearside indicators on centre islands should display a red man signal if the pushbutton is pressed during 
+the blackout period.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt6">YES
+		<input type="radio" name="pt6">NO
+		<input type="radio" name="pt6">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+<h2>Secret signs
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-secret-signs')">
+</label>
+</h2>
+<div id="sec-secret-signs" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Check operation of secret signs operated by time clock.  Check switch on sequence
+ and position(s) in cycle at which signs operate as specified.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ss">YES
+		<input type="radio" name="ss">NO
+		<input type="radio" name="ss">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Part time control
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-part-time-control')">
+</label>
+</h2>
+<div id="sec-part-time-control" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Part time signal - check switch on - switch off sequence as specified.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pt">YES
+		<input type="radio" name="pt">NO
+		<input type="radio" name="pt">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<p style="page-break-before: always">
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Hurry Calls
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-hurry-calls')">
+</label>
+</h2>
+<div id="sec-hurry-calls" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Implement the hurry call and check the response of the Controller. Check that the hurry call cancels
+automatically at the end of its maximum running time and can be cancelled manually where specified
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="hc">YES
+		<input type="radio" name="hc">NO
+		<input type="radio" name="hc">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Pedestrian Links
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-pedestrian-links')">
+</label>
+</h2>
+<div id="sec-pedestrian-links" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Check that the linked pedestrian crossing operates correctly under the influence of  The traffic signal
+master control.  Check that pedestrian demands at the crossing override excessive hold periods
+generated by the traffic signals e.g. lack of vehicle demand at signals to create a stage change 
+to release hold.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="pl1">YES
+		<input type="radio" name="pl1">NO
+		<input type="radio" name="pl1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Speed Control
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-speed-control')">
+</label>
+</h2>
+<div id="sec-speed-control" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Speed Discrimination (Double SDE) - check for 3 second green extensions for vehicles travelling over 30mph up to phase maximum.  Following intergreen should extend for an additional 2 seconds.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="sc1">YES
+		<input type="radio" name="sc1">NO
+		<input type="radio" name="sc1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Speed assessment - check for 5 second additional fixed green extension for vehicles travelling over 28mph.  Following intergreen should extend by an additional 2 seconds.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="sc2">YES
+		<input type="radio" name="sc2">NO
+		<input type="radio" name="sc2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Audible & tactile units
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-audible-tactile-units')">
+</label>
+</h2>
+<div id="sec-audible-tactile-units" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Check that the audible signal can be heard from the adjacent crossing point but is not so loud 
+that it causes undue disturbance.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at1">YES
+		<input type="radio" name="at1">NO
+		<input type="radio" name="at1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Where tactile signals are provided, check correct operation of all tactile units and that
+they have been installed on the right hand side of the bottom of the push button unit.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at2">YES
+		<input type="radio" name="at2">NO
+		<input type="radio" name="at2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Audible signals may only operate during pedestrian stages that do not contain any vehicle
+phases. Walk with traffic pedestrian phases shall have tactile signals (unless specified
+otherwise by the client).</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at3">YES
+		<input type="radio" name="at3">NO
+		<input type="radio" name="at3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check that all audible units operate satisfactorily. Adjust volume according to 
+site requirements. Audible units should not be heard from any adjacent traffic signal site.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at4">YES
+		<input type="radio" name="at4">NO
+		<input type="radio" name="at4">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Audible signals shall not be provided on pedestrian refuge islands.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at5">YES
+		<input type="radio" name="at5">NO
+		<input type="radio" name="at5">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Where tactile signals are being provided they shall also be provided on pedestrian 
+refuge islands.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at6">YES
+		<input type="radio" name="at6">NO
+		<input type="radio" name="at6">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Where audible signals are provided all pedestrian phases shall display a green man 
+simultaneously and the audible signals shall commence and terminate with the green man.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at7">YES
+		<input type="radio" name="at7">NO
+		<input type="radio" name="at7">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Tactile signals shall start simultaneously with green man signal.  If control reverts to a walk with traffic 
+stage the green man may remain illuminated for the duration of the stage however, the tactile unit can
+end after the minimum green man time and then shall restart when push button pressed, for a duration equal to the pedestrian minimum green period. The green man and the tactile shall 
+terminate simultaneously at the end of the stage</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="at8">YES
+		<input type="radio" name="at8">NO
+		<input type="radio" name="at8">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Electrical Disconnection systems
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-electrical-disconnection-systems')">
+</label>
+</h2>
+<div id="sec-electrical-disconnection-systems" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Tests are to be undertaken to test the operation of the electrical disconnection system and are to be
+carried out on each pole that contains disconnection equipment.  During tests, the correct corresponding
+breaker should operate within the controller.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ed1">YES
+		<input type="radio" name="ed1">NO
+		<input type="radio" name="ed1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>For non-separating (NS) or separating (SE) passive safe poles equipped with an IEI system triggered
+by an impact / tilt switch, the SWA cable is to be terminated within a low-level door aperture.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ed2">YES
+		<input type="radio" name="ed2">NO
+		<input type="radio" name="ed2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>For separating (SE) passively safe poles equiped with snatch plug assembly, the SWA cable should be 
+terminated using a bottle joint located within a chamber adjacent to the pole.  The snatch plug cable 
+assembly should be restrained in both the chamber and pole, with the snatch plug located at ground level
+within the pole and terminated in a low-level door aperture.
+</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="ed3">YES
+		<input type="radio" name="ed3">NO
+		<input type="radio" name="ed3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Urban Traffic Control
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-urban-traffic-control')">
+</label>
+</h2>
+<div id="sec-urban-traffic-control" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Check that a suitable OTU and router is fitted.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="utc1">YES
+		<input type="radio" name="utc1">NO
+		<input type="radio" name="utc1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Ensure that IP address is noted in the controller log book.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="utc2">YES
+		<input type="radio" name="utc2">NO
+		<input type="radio" name="utc2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check that a suitable communications line or 4G aerial is connected to the OTU/router.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="utc3">YES
+		<input type="radio" name="utc3">NO
+		<input type="radio" name="utc3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Ensure suitable checks are conducted for the O.T.U. Commissioning via the instation.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="utc4">YES
+		<input type="radio" name="utc4">NO
+		<input type="radio" name="utc4">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check SCOOT loop replies via UTC instation. SCOOT detector cards must be set to MEDIUM sensitivity and MEDIUM presence time (3 to 4 minutes</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="utc5">YES
+		<input type="radio" name="utc5">NO
+		<input type="radio" name="utc5">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<p style="page-break-before: always">
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>MOVA
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-mova')">
+</label>
+</h2>
+<div id="sec-mova" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td>Check MOVA detection within MOVA Comms or web interface using laptop</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova1">YES
+		<input type="radio" name="mova1">NO
+		<input type="radio" name="mova1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check installation has enabling licence loaded that is individual to site (not temporary). Note MOVA LIN,
+LIF, HIC and Red Card details or SIM Card details in log book</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova2">YES
+		<input type="radio" name="mova2">NO
+		<input type="radio" name="mova2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check confirms: Each stage and phase receives the correct confirm </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova3">YES
+		<input type="radio" name="mova3">NO
+		<input type="radio" name="mova3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td><b>Check CRB<//b></td>
+	</tr>
+	<tr>
+	<td>1. Switch Controller to normal, then watch CRB on MOVA display: Check it shows  "active" </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova4">YES
+		<input type="radio" name="mova4">NO
+		<input type="radio" name="mova4">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>2. Switch Controller to manual or manually selected VA CRB should change state to  "inactive" </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova5">YES
+		<input type="radio" name="mova5">NO
+		<input type="radio" name="mova5">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>3. If possible, remove power from controller and check the mode it returns to, and if CRB returns to active.
+Otherwise, check the power-up mode specified and check that in this mode CRB is active."</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova6">YES
+		<input type="radio" name="mova6">NO
+		<input type="radio" name="mova6">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+		<td><b>Check Force bits:</b></td>
+	</tr>
+	<tr>
+		<td>1. Check that each MOVA stage force forces the correct Controller stage. Do this at time that a change is not otherwise expected, to ensure it is the force bit which makes the change.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova7">YES
+		<input type="radio" name="mova7">NO
+		<input type="radio" name="mova7">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>2. Check that force bits can hold stages beyond when they would otherwise change to ensure they have full control.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova8">YES
+		<input type="radio" name="mova8">NO
+		<input type="radio" name="mova8">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>MOVA warm-up procedure </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova6">YES
+		<input type="radio" name="mova6">NO
+		<input type="radio" name="mova6">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check that MOVA takes control </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova7">YES
+		<input type="radio" name="mova7">NO
+		<input type="radio" name="mova7">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check that MOVA stays on </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova8">YES
+		<input type="radio" name="mova8">NO
+		<input type="radio" name="mova8">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr>
+	<td><b>When MOVA is operational:</b></td>
+	</tr>
+	<tr>
+		<td>1. Check that the Manual Panel Higher Priority mode LED is on when</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova9">YES
+		<input type="radio" name="mova9">NO
+		<input type="radio" name="mova9">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>2. MOVA is running</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova10">YES
+		<input type="radio" name="mova10">NO
+		<input type="radio" name="mova10">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>3. Check all pedestrian demands are satisfied</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova11">YES
+		<input type="radio" name="mova11">NO
+		<input type="radio" name="mova11">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		</tr>
+	<tr><td>4. Control is correct/workable</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova12">YES
+		<input type="radio" name="mova12">NO
+		<input type="radio" name="mova12">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		</tr>
+	<tr><td>5. Assessment Log is switched on</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova13">YES
+		<input type="radio" name="mova13">NO
+		<input type="radio" name="mova13">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>6. Hourly Flow log is switched on </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova14">YES
+		<input type="radio" name="mova14">NO
+		<input type="radio" name="mova14">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td><b>Before leaving site, check:</b></td></tr>
+	<tr>
+		<td>1. DA and DF logs are starting to accumulate data - need a complete hour to see this Error Log has been  cleared </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova15">YES
+		<input type="radio" name="mova15">NO
+		<input type="radio" name="mova15">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>2. MOVA clock is correct</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova16">YES
+		<input type="radio" name="mova16">NO
+		<input type="radio" name="mova16">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>3. Save to disk a copy of the CN and DS output for QA purposes</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova20">YES
+		<input type="radio" name="mova20">NO
+		<input type="radio" name="mova20">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>4. MOVA left operational</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova18">YES
+		<input type="radio" name="mova18">NO
+		<input type="radio" name="mova18">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>If MOVA operation has not been satisfactorily completed, the controller is to be left in a fully checked
+mode of operation </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="mova19">YES
+		<input type="radio" name="mova19">NO
+		<input type="radio" name="mova19">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div>
+<h2>Remote Monitoring
+<label style="font-size:14px;margin-left:15px;">
+N/A <input type="checkbox" onchange="toggleSection(this,'sec-remote-monitoring')">
+</label>
+</h2>
+<div id="sec-remote-monitoring" class="section-content">
+
+<table><td width="550px"></td>
+	<tr><td> Check that a suitable OMCU is fitted and a SIM card is provided to the Installation Contractor.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="rm1">YES
+		<input type="radio" name="rm1">NO
+		<input type="radio" name="rm1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Ensure suitable checks are conducted for the OMCU Commissioning via the instation. </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="rm3">YES
+		<input type="radio" name="rm3">NO
+		<input type="radio" name="rm3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+
+</div><h2>Red Lamp Monitoring</h2>
+<table><td width="550px"></td>
+	<tr><td>Simulate one red lamp failure. There must be a minimum all red period of 3secs if configured.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="red1">YES
+		<input type="radio" name="red1">NO
+		<input type="radio" name="red1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Simulate two red lamp failures on a phase, to check RLM inhibits pedestrian phases. (Pedestrian wait
+ indicators should illuminate)</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="red2">YES
+		<input type="radio" name="red2">NO
+		<input type="radio" name="red2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Miscellaneous</h2>
+<table><td width="550px"></td>
+	<tr><td>Installation Contractor to submit cable test results and cable schematic diagram. </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="misc1">YES
+		<input type="radio" name="misc1">NO
+		<input type="radio" name="misc1">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Installation Contractor to submit a Earth Loop Impedance (ELI) test certificate. If a hard copy cannot be
+provided at SAT, the designer must take a photograph of the document with the original emailed within
+24hrs.  (Signals <u>MUST NOT</u> be left on unless this document has been seen at SAT).</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="misc2">YES
+		<input type="radio" name="misc2">NO
+		<input type="radio" name="misc2">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Installation Contractor to submit a Take Over Certificate.  If a hard copy cannot be provided at SAT, it
+must be emailed to the designer within 24hrs. (Signals MUST NOT be left on unless this
+document has been seen at SAT). </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="misc3">YES
+		<input type="radio" name="misc3">NO
+		<input type="radio" name="misc3">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Check controller fault log is clear</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="misc4">YES
+		<input type="radio" name="misc4">NO
+		<input type="radio" name="misc4">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Ensure log book has been filled in.</td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="misc5">YES
+		<input type="radio" name="misc5">NO
+		<input type="radio" name="misc5">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table><br>
+<table><td width="550px"></td>
+	<tr><td>Photos of the completed site are to be taken for site records. Photos are to include each approach,
+the inside of the controller and any snagged or missing items. 
+A selection must also be sent to the comms team for the website and social media. </td>
+		</tr>
+	<tr><td>
+		<input type="radio" name="misc6">YES
+		<input type="radio" name="misc6">NO
+		<input type="radio" name="misc6">N/A
+		</td>
+	</tr>
+	<tr>
+		<td>Additional comments:</td>
+		<tr align="Left"><td>
+			<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="1" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+<p style="page-break-before: always">
+	
+	<br>
+	<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+	
+<h2>Final Sign Off</h2>
+<table>
+<tr><td>Date of Commissioning:</td>
+		<td><input type="date" ></td>
+	</tr>
+	<tr><td>Start Time of Commissioning:</td>
+		<td><input type="time" ></td>
+	</tr>
+</table><br>
+<b>Attendees</b><br><br>
+<table>
+	<tr>
+        <td>Name:</td>
+        <td><input type="text"></td>
+        <td>Company:</td>
+        <td><input type="text"></td>
+    </tr>
+	<tr>
+	
+        <td>Signature:</td>
+        <td>
+            <canvas id="signature-pad-1" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <button id="clear-1">Clear</button>
+        </td>
+    </tr>
+</table>
+	
+<table>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text"></td>
+        <td>Company:</td>
+        <td><input type="text"></td>
+    </tr>
+    <tr>
+        <td>Signature:</td>
+        <td>
+            <canvas id="signature-pad-2" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <button id="clear-2">Clear</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text"></td>
+        <td>Company:</td>
+        <td><input type="text"></td>
+    </tr>
+    <tr>
+        <td>Signature:</td>
+        <td>
+            <canvas id="signature-pad-3" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <button id="clear-3">Clear</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text"></td>
+        <td>Company:</td>
+        <td><input type="text"></td>
+    </tr>
+    <tr>
+        <td>Signature:</td>
+        <td>
+            <canvas id="signature-pad-4" width="400" height="80" style="border:1px solid #000000; background-color: #FFFFFF;"></canvas>
+            <button id="clear-4">Clear</button>
+        </td>
+    </tr>
+</table>
+
+			
+			<br>
+			<lable for= "freeform"><b>Additional Comments:</b> </lable><br> 
+	
+	<textarea id="freeform" name="freeform"
+			placeholder="Enter notes here:"  
+			  rows="2" cols="40"></textarea>
+			
+<h2> Oustanding Work at time of Commissioning</h2>
+<h3>Traffic Signals</h3>
+<textarea id="freeform" name="freeform" rows="10" cols="75"
+placeholder="Enter text here:">
+</textarea><br>
+<h3>Civils</h3>
+<textarea id="freeform" name="freeform" rows="10" cols="75"
+placeholder="Enter text here:">
+</textarea><br><br>
+<div>
+    <button onclick="window.print()">Print This Page</button>
+    <button id="clear-document">Clear Document</button>
+</div>
+</form>
+</font>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var canvas1 = document.getElementById('signature-pad-1');
+        var signaturePad1 = new SignaturePad(canvas1);
+        document.getElementById('clear-1').addEventListener('click', function(event) {
+            event.preventDefault();
+            signaturePad1.clear();
+        });
+
+        var canvas2 = document.getElementById('signature-pad-2');
+        var signaturePad2 = new SignaturePad(canvas2);
+        document.getElementById('clear-2').addEventListener('click', function(event) {
+            event.preventDefault();
+            signaturePad2.clear();
+        });
+
+        var canvas3 = document.getElementById('signature-pad-3');
+        var signaturePad3 = new SignaturePad(canvas3);
+        document.getElementById('clear-3').addEventListener('click', function(event) {
+            event.preventDefault();
+            signaturePad3.clear();
+        });
+		
+		var canvas4 = document.getElementById('signature-pad-4');
+        var signaturePad4 = new SignaturePad(canvas4);
+        document.getElementById('clear-4').addEventListener('click', function(event) {
+            event.preventDefault();
+            signaturePad4.clear();
+        });
+		        document.getElementById('clear-document').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Clear all input fields
+            document.querySelectorAll('input[type="text"]').forEach(function(input) {
+                input.value = '';
+            });
+            // Clear all signature pads
+            signaturePad1.clear();
+            signaturePad2.clear();
+            signaturePad3.clear();
+			signaturePad4.clear();
+        });
+    });
+</script>
+</body>
+</html>
