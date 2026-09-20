@@ -89,7 +89,14 @@
     </style>
 
     <script>
-function confirmRefresh() {
+        window.addEventListener('beforeunload', function (e) {
+            if (window.__printing) return;
+            var confirmationMessage = 'Are you sure you want to leave this page?';
+            e.returnValue = confirmationMessage;
+            return confirmationMessage;
+        });
+
+        function confirmRefresh() {
             if (confirm("Are you sure you want to refresh the page?")) {
                 location.reload();
             }
@@ -3528,126 +3535,38 @@ placeholder="Enter text here:">
 </font>
 
 <script>
-    // iPhone-safe print handling.
-    // Save the form before invoking Safari's print UI. If iOS reloads the
-    // document when returning from print, the entered data is restored.
+    // Dedicated print handler. iOS Safari can return from window.print()
+    // immediately and can also react badly to page lifecycle handlers.
     document.addEventListener("DOMContentLoaded", function() {
-        var form = document.querySelector("form");
         var printButton = document.getElementById("print-page");
-        var STORAGE_KEY = "elv_junction_sat_form_draft";
-
-        function saveFormDraft() {
-            if (!form) return;
-
-            var data = {
-                controls: [],
-                signatures: {}
-            };
-
-            form.querySelectorAll("input, textarea, select").forEach(function(el, index) {
-                if (el.id === "print-page" || el.id === "clear-document") return;
-
-                data.controls.push({
-                    index: index,
-                    tag: el.tagName,
-                    type: el.type || "",
-                    value: el.value,
-                    checked: !!el.checked
-                });
-            });
-
-            ["1","2","3","4"].forEach(function(n) {
-                var canvas = document.getElementById("signature-pad-" + n);
-                if (canvas) {
-                    try {
-                        data.signatures[n] = canvas.toDataURL("image/png");
-                    } catch (e) {}
-                }
-            });
-
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-            } catch (e) {}
-        }
-
-        function restoreFormDraft() {
-            var raw;
-            try {
-                raw = localStorage.getItem(STORAGE_KEY);
-            } catch (e) {
-                return;
-            }
-
-            if (!raw) return;
-
-            try {
-                var data = JSON.parse(raw);
-                var controls = form ? form.querySelectorAll("input, textarea, select") : [];
-
-                (data.controls || []).forEach(function(item) {
-                    var el = controls[item.index];
-                    if (!el) return;
-
-                    if (el.type === "radio" || el.type === "checkbox") {
-                        el.checked = item.checked;
-                    } else {
-                        el.value = item.value;
-                    }
-
-                    el.dispatchEvent(new Event("change", { bubbles: true }));
-                });
-
-                // Restore signature images after SignaturePad has initialized.
-                setTimeout(function() {
-                    ["1","2","3","4"].forEach(function(n) {
-                        var canvas = document.getElementById("signature-pad-" + n);
-                        var image = data.signatures && data.signatures[n];
-
-                        if (!canvas || !image || image === "data:,") return;
-
-                        var ctx = canvas.getContext("2d");
-                        var img = new Image();
-
-                        img.onload = function() {
-                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        };
-
-                        img.src = image;
-                    });
-                }, 300);
-            } catch (e) {}
-        }
-
-        if (form) {
-            form.addEventListener("input", saveFormDraft);
-            form.addEventListener("change", saveFormDraft);
-        }
 
         if (printButton) {
             printButton.addEventListener("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
 
-                saveFormDraft();
-
                 var savedScrollY = window.scrollY || window.pageYOffset || 0;
+
+                // Temporarily disable the beforeunload handler while printing.
+                // It is not needed for printing and can interfere with Safari's
+                // print lifecycle.
+                window.__printing = true;
                 printButton.blur();
 
                 setTimeout(function() {
                     window.print();
 
-                    // Keep the current position when Safari returns.
+                    // Safari/iOS may return immediately, so restore the
+                    // original position shortly afterwards.
                     setTimeout(function() {
                         window.scrollTo(0, savedScrollY);
+                        window.__printing = false;
                     }, 1000);
                 }, 150);
             });
         }
-
-        // Restore any data if iOS has recreated the page.
-        restoreFormDraft();
     });
-
+</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
